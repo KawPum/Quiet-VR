@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 297038295
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9edba527642f4b3296a3a55865a51032
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f19fbf085e00d23fbc8d6cf7b345590b
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/Brown-Hotel-Wallpaper-Texture.jpg
+Dependencies: []

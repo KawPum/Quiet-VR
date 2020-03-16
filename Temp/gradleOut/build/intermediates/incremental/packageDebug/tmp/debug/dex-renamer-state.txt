@@ -1,0 +1,7 @@
+#Sat Feb 29 16:21:16 MSK 2020
+base.0=C\:\\Users\\ereme\\Documents\\Samsung_School_Prototype\\Temp\\gradleOut\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+path.1=classes.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=C\:\\Users\\ereme\\Documents\\Samsung_School_Prototype\\Temp\\gradleOut\\build\\intermediates\\transforms\\dexMerger\\debug\\0

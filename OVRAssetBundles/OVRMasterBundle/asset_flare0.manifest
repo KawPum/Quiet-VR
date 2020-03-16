@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1998376465
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c90ac33ad0c78f6aea4b13e520ed4b7c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8ed3e85428aa44c147092b8920f671b7
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 121
+  Script: {instanceID: 0}
+Assets:
+- Assets/Standard Assets/Effects/LightFlares/Flares/Sun.flare
+Dependencies:
+- C:/Users/ereme/Documents/Samsung_School_Prototype/OVRAssetBundles/OVRMasterBundle/asset_psd0

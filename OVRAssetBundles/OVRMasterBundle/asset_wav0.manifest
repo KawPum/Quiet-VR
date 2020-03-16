@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 3979558975
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b3a4f16f876f0d3f578d36d3404db13b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/FootstepsSoundsCarpetPack/footsteps_run_carpet_2.wav
+- Assets/FootstepsSoundsCarpetPack/footsteps_walk_carpet_2.wav
+- Assets/FootstepsSoundsCarpetPack/footsteps_walk_carpet_1.wav
+- Assets/FootstepsSoundsCarpetPack/footsteps_run_carpet_1.wav
+Dependencies: []

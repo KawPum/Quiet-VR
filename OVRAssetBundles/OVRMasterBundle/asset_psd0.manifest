@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3404832008
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f2127c410d9ba9f2b0ad68a280ce7dba
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f19fbf085e00d23fbc8d6cf7b345590b
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/Standard Assets/Effects/LightFlares/Textures/Flare50mm.psd
+Dependencies: []

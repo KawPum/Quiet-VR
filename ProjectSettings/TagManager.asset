@@ -8,6 +8,8 @@ TagManager:
   - Puzzle
   - Key
   - Door
+  - Movable_Box
+  - Turnable_Door
   layers:
   - Default
   - TransparentFX

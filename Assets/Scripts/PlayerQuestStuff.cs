@@ -19,6 +19,7 @@ public class PlayerQuestStuff : MonoBehaviour
     private ObjectRotate obj; //пустая ссылка для экземпляра класса ObjectInspect. в коде пригодится дальше
     private RigidbodyFirstPersonController rb_move;
     public bool change = false;
+    public Inventory inventory;
 
     private void Start()
     {
@@ -45,6 +46,7 @@ public class PlayerQuestStuff : MonoBehaviour
             items_mesh.Add(obj.reward);
             Destroy(puzzle);
             obj.win = false;
+            inventory.update_Text();
         }
     }
 
@@ -71,6 +73,7 @@ public class PlayerQuestStuff : MonoBehaviour
               //      child.gameObject.layer = 5;
               //  }
                 obj.inHand = true; // сообщаем компоненту, что паззл в руках
+                inventory.update_Text();
             }
         }
 

@@ -903,12 +903,20 @@ MonoBehaviour:
   reward: {fileID: 4477415402863393485, guid: 027ad323ca415164a934766f3b8dd46c, type: 3}
   path: Puzzle.prefab
   win: 0
+  player: {fileID: 0}
+  description: "\u0428\u043A\u0430\u0442\u0443\u043B\u043A\u0430 \u043C\u0430\u043C\u044B.
+    \u042F \u043D\u0435 \u043F\u043E\u043C\u043D\u044E, \u0447\u0442\u043E\u0431\u044B
+    \u044F \u0432\u0438\u0434\u0435\u043B\u0430 \u0435\u0451 \u0432 \u0434\u0435\u0442\u0441\u0442\u0432\u0435.
+    \u041C\u043E\u0436\u0435\u0442 \u043E\u043D\u0430 \u043F\u0440\u0438\u043E\u0431\u0440\u0435\u043B\u0430
+    \u0435\u0451 \u043D\u0435\u0434\u0430\u0432\u043D\u043E?"
   minX: -360
   maxX: 360
-  minY: -45
-  maxY: 45
+  minZ: -45
+  maxZ: 45
   sensX: 100
-  sensY: 100
+  sensZ: 100
+  minScale: 0.7
+  maxScale: 2
 --- !u!1 &1097687173838591681
 GameObject:
   m_ObjectHideFlags: 0

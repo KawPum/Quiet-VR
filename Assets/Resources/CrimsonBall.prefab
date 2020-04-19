@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4477415402863393481}
   - component: {fileID: 4477415402863393486}
   - component: {fileID: 4477415402863393487}
+  - component: {fileID: 1609872804593810534}
   m_Layer: 0
   m_Name: CrimsonBall
   m_TagString: Ball
@@ -108,3 +109,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1609872804593810534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4477415402863393485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76621398770e8864c9b1af3fa9541d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finish: {fileID: 0}
+  ball: {fileID: 0}
+  inHand: 0
+  reward: {fileID: 0}
+  path: 
+  win: 0
+  player: {fileID: 0}
+  description: "\u0428\u0430\u0440 \u0438\u0437 \u043A\u0440\u0430\u0441\u043D\u043E\u0433\u043E
+    \u0441\u0442\u0435\u043A\u043B\u0430. \u041E\u043D \u0441\u043B\u043E\u0432\u043D\u043E
+    \u0440\u0443\u0431\u0438\u043D\u043E\u0432\u044B\u0439 \u0438\u043B\u0438 \u0436\u0435
+    \u043E\u043A\u0440\u0430\u0448\u0435\u043D\u043D\u044B\u0439 \u0432 \u0447\u044C\u044E-\u0442\u043E
+    \u043A\u0440\u043E\u0432\u044C."
+  minX: -360
+  maxX: 360
+  minZ: -45
+  maxZ: 45
+  sensX: 100
+  sensZ: 100
+  minScale: 0.7
+  maxScale: 2

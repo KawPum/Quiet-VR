@@ -10,6 +10,11 @@ TagManager:
   - Door
   - Movable_Box
   - Turnable_Door
+  - Wardrobe
+  - Cupboard
+  - Computer
+  - Case
+  - WardrobeShake
   layers:
   - Default
   - TransparentFX

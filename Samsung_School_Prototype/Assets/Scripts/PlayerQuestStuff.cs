@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class PlayerQuestStuff : MonoBehaviour  // писал Милованов Еремей
+public class PlayerQuestStuff : MonoBehaviour 
 {
     public GameObject UICamera; // inventory ui, здесь ссылка на канвас, отвечающий за весь ЮИ
     private GameObject puzzle; // empty object for puzzle
@@ -33,6 +33,8 @@ public class PlayerQuestStuff : MonoBehaviour  // писал Милованов 
         {
             UICamera.SetActive(!UICamera.activeSelf);
             rb_move.enabled = !rb_move.enabled;
+            //inventory.update_Text();
+            change = true;
         }
 
         if (obj != null && obj.win) //если объект паззла ещё в руках, а сам паззл деактивирован (головоломка решена)
@@ -46,7 +48,8 @@ public class PlayerQuestStuff : MonoBehaviour  // писал Милованов 
             items_mesh.Add(obj.reward);
             Destroy(puzzle);
             obj.win = false;
-            inventory.update_Text();
+            //inventory.update_Text();
+            change = true;
         }
 
         RaycastHit hit;
@@ -68,7 +71,8 @@ public class PlayerQuestStuff : MonoBehaviour  // писал Милованов 
                     obj = puzzle.GetComponent<ObjectRotate>(); // кидаем в ссылку компонент ObjectInspect паззла
                     items_mesh.Add(puzzle);
                     obj.inHand = true; // сообщаем компоненту, что паззл в руках
-                    inventory.update_Text();
+                    //inventory.update_Text();
+                    change = true;
                 }
             }
 
@@ -79,7 +83,8 @@ public class PlayerQuestStuff : MonoBehaviour  // писал Милованов 
                 other.GetComponent<ObjectRotate>().inHand = true;
                 cam.Toast("Получен: " + other.name);
                 other.SetActive(false); //скрываем объект ключа, типа он удалился/исчез/мы его взяли
-                inventory.update_Text();
+                //inventory.update_Text();
+                change = true;
             }
 
             if (other.CompareTag("Door") && Input.GetMouseButtonDown(0)) //если дверь и кнопка нажата
@@ -112,7 +117,7 @@ public class PlayerQuestStuff : MonoBehaviour  // писал Милованов 
 
         obj.win = false;
         change = true;
-        inventory.update_Text();
+        //inventory.update_Text();
     }
 
     public void get_Reward(Shaking shkaf)
@@ -120,8 +125,16 @@ public class PlayerQuestStuff : MonoBehaviour  // писал Милованов 
         cam.Toast("Получен: " + shkaf.reward_name);
         items.Add(shkaf.reward_name);
         items_mesh.Add(shkaf.reward_mesh);
-        shkaf.reward_mesh.SetActive(false);
-        inventory.update_Text();
+        //shkaf.reward_mesh.SetActive(false);
+        change = true;
+        shkaf.enabled = false;
+        Debug.Log("Shaking   " + shkaf.enabled);
+    }
+
+    public void StopShaking(GameObject gO)
+    {
+        ///gO.GetComponent<Shaking>().enabled = false;
+        Debug.Log("Shaking   " + gO.GetComponent<Shaking>().enabled);
     }
 
 }

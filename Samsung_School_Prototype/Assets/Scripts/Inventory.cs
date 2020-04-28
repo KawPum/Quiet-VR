@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour // писал Милованов Еремей
+public class Inventory : MonoBehaviour
 {
-    public PlayerQuestStuff player_object;
-    private Text[] names_output = new Text[5];
+    //private GameObject player;
+    PlayerQuestStuff player_object;
+    //private
+    Text[] names_output = new Text[5];
     private GameObject subject;
     public Text description;
 
     void Start()
     {
+        player_object = FindObjectOfType<PlayerQuestStuff>();
+        string a = "";
         for (int i = 0; i < 5; i++)
         {
-            names_output[i] = transform.GetChild(i).GetComponent<Text>();
+            names_output[i] =  transform.GetChild(i).GetComponent<Text>();
             names_output[i].color = Color.white;
         }
         update_Text();
@@ -35,7 +39,7 @@ public class Inventory : MonoBehaviour // писал Милованов Ерем
         if (Input.GetKeyDown(KeyCode.LeftArrow)) switch_Item(-1);
     }
 
-    void switch_Item(int step) // сдвиг массива с предметами в зависимости от значения шага. Алгоритм сдвига взят с форума
+    void switch_Item(int step)
     {
         Destroy(subject.gameObject);
         string temp;
@@ -79,9 +83,9 @@ public class Inventory : MonoBehaviour // писал Милованов Ерем
 
         for (int i = 0; i < 5; i++)
         {
-            if (i >= player_object.items.Count) break;
-            if (i+2<5)
-            names_output[i].text = player_object.items[i];
+            if (i == player_object.items.Count) break;
+            Debug.Log("i    " + names_output[i].text);
+            if (i+2<5) names_output[i].text = player_object.items[i];
             else names_output[i].text = player_object.items[player_object.items.Count-(5-i)];
         }
 

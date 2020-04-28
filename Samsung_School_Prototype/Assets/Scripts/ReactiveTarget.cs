@@ -5,7 +5,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class ReactiveTarget : MonoBehaviour
 {
-
     public int ObjectId;
     public float deltaPostion = 10f;
     Transform parent;
@@ -47,6 +46,7 @@ public class ReactiveTarget : MonoBehaviour
 
     public string React()
     {
+        
         transform.gameObject.GetComponent<Renderer>().material.color = new Color(1, 0.96f, 0.321f, 0);
         if (parent.gameObject.tag == "Wardrobe")
         {
@@ -108,6 +108,9 @@ public class ReactiveTarget : MonoBehaviour
             {
                 FindObjectOfType<RigidbodyFirstPersonController>().enabled = false;
                 parent.GetComponent<Shaking>().enabled = true;
+                parent.GetComponent<Shaking>().score = 0;
+                parent.GetComponent<Shaking>().got = 0;
+                parent.GetComponent<Shaking>().StopReactive(false);
             }
             return ("трясьти");
         }

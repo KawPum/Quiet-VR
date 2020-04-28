@@ -7,17 +7,17 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class Shaking : MonoBehaviour
 {
     float mouseX;
-    float score;
-    float got;
-    bool finished;
+    public float score;
+    public float got;
+    bool finished = false;
     public string reward_name;
     public GameObject reward_mesh;
     // Start is called before the first frame update
     void Start()
     {
         mouseX = Input.GetAxis("Mouse X");
+        got = 0;
         score = 0;
-        finished = false;
     }
 
     // Update is called once per frame
@@ -28,37 +28,36 @@ public class Shaking : MonoBehaviour
 
         if ((Input.GetAxis("Mouse X") != mouseX) && (got == 0))
         {
-            StopReactive(false);
-            score += 0.7f;
-            transform.localRotation = Quaternion.Euler((float)Math.Sin(score) * 10, transform.localEulerAngles.y, transform.localEulerAngles.z);
+            score += 0.09f;
+            transform.localRotation = Quaternion.Euler((float)Math.Sin(score) * (score/7), transform.localEulerAngles.y, transform.localEulerAngles.z);
         }
         else
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, transform.eulerAngles.y, transform.eulerAngles.z), 5f * Time.deltaTime);
-            if (transform.eulerAngles.x < 0.5f)
+            if (transform.eulerAngles.x < 0.02f)
             {
                 score = 0;
                 if (got != 0)
                 {
                     score = 0;
                     FindObjectOfType<RigidbodyFirstPersonController>().enabled = true;
-                    GetComponent<Shaking>().enabled = false;
+                    StopReactive(true);
                     if (!finished)
                     {
-                        FindObjectOfType<PlayerQuestStuff>().get_Reward(GetComponent<Shaking>());
                         finished = true;
+                        FindObjectOfType<PlayerQuestStuff>().get_Reward(GetComponent<Shaking>());
                     }
-                    StopReactive(true);
+                    //FindObjectOfType<PlayerQuestStuff>().StopShaking(transform.gameObject);
                 }
             }
             if (score != 0)
             {
-                score -= 0.02f;
+                score -= 0.01f;
             }
         }
     }
 
-    void StopReactive(bool state)
+    public void StopReactive(bool state)
     {
         foreach (Transform child in transform.GetComponentsInChildren<Transform>())
         {

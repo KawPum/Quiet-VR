@@ -38,6 +38,7 @@ public class PlayerQuestStuff : MonoBehaviour
             //inventory.update_Text();
             change = true;
             controlScript.inv_button = false;
+            controlScript.setRotateTouchFalse();
         }
 
         if (obj != null && obj.win) //если объект паззла ещё в руках, а сам паззл деактивирован (головоломка решена)

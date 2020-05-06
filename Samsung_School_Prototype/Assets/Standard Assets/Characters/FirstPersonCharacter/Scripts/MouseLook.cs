@@ -32,6 +32,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CameraTargetRot = camera.localRotation;
         }
 
+        public void setRotateTouchFalse()
+        {
+            for(int i = 0; i < rotateTouch.Count; i++)
+            {
+                rotateTouch[i] = false;
+            }
+        }
+
 
         public void LookRotation(Transform character, Transform camera)
         {
@@ -66,7 +74,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         }
                         break;
                     case TouchPhase.Ended:
-                        rotateTouch[touch.fingerId] = false;
                         if ((Time.time - startTouch[touch.fingerId] < 1f)&&(Math.Abs(touch.position.x - positionTouch[touch.fingerId].x)<0.05f) && (Math.Abs(touch.position.y - positionTouch[touch.fingerId].y) < 0.05f))
                         {
                             if (!inv_button && !down_button)
@@ -75,6 +82,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                                 click = true;
                             }
                         }
+                        rotateTouch[touch.fingerId] = false;
                         break;
                 }
             }

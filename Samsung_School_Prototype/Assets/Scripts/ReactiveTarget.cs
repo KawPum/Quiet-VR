@@ -15,6 +15,8 @@ public class ReactiveTarget : MonoBehaviour
     float posOpen;
     float posClose;
     DoorScript door;
+    MouseLook controlScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class ReactiveTarget : MonoBehaviour
         posClose = transform.localPosition.z;
         posOpen = posClose + deltaPostion;
         changePosition = posOpen * opened - (posClose * (opened - 1));
-
+        controlScript = FindObjectOfType<RigidbodyFirstPersonController>().mouseLook;
     }
 
     // Update is called once per frame
@@ -52,7 +54,7 @@ public class ReactiveTarget : MonoBehaviour
         {
             if (ObjectId != 0)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (controlScript.click)
                 {
                     parent.GetComponent<WardrobeSecret>().openCases(ObjectId);
                 }
@@ -61,7 +63,7 @@ public class ReactiveTarget : MonoBehaviour
             else
             {
                 string text = parent.GetComponent<WardrobeSecret>().getTextOpened();
-                if ((text == "открыть/закрыть") && (Input.GetMouseButtonDown(0)))
+                if ((text == "открыть/закрыть") && controlScript.click)
                 {
                     parent.GetComponent<WardrobeSecret>().openSecretCase();
                 }
@@ -72,14 +74,14 @@ public class ReactiveTarget : MonoBehaviour
 
         if (transform.tag == "Door")
         {
-            if (door == null && (Input.GetMouseButtonDown(0)))
+            if (door == null && controlScript.click)
             {
                 opened = (opened + 1) % 2;
                 angle -= ((ObjectId - 0.5f) * 180) * (opened - 0.5f) * 2;
             }
             else if (door != null)
             {
-                if (!door.closed && (Input.GetMouseButtonDown(0)))
+                if (!door.closed && controlScript.click)
                 {
                     opened = (opened + 1) % 2;
                     angle -= ((ObjectId - 0.5f) * 180) * (opened - 0.5f) * 2;
@@ -94,7 +96,7 @@ public class ReactiveTarget : MonoBehaviour
         }
         if (transform.tag == "Case")
         {
-            if (Input.GetMouseButtonDown(0))
+            if (controlScript.click)
             {
                 opened = (opened + 1) % 2;
                 changePosition = posOpen * opened - (posClose * (opened - 1));
@@ -104,7 +106,7 @@ public class ReactiveTarget : MonoBehaviour
 
         if (transform.tag == "WardrobeShake")
         {
-            if (Input.GetMouseButtonDown(0))
+            if (controlScript.click)
             {
                 FindObjectOfType<RigidbodyFirstPersonController>().enabled = false;
                 parent.GetComponent<Shaking>().enabled = true;
@@ -112,8 +114,9 @@ public class ReactiveTarget : MonoBehaviour
                 parent.GetComponent<Shaking>().got = 0;
                 parent.GetComponent<Shaking>().StopReactive(false);
             }
-            return ("трясьти");
+            return ("трясти");
         }
+
         return "";
     }
 

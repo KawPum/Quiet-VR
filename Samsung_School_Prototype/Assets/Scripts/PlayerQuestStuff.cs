@@ -20,21 +20,24 @@ public class PlayerQuestStuff : MonoBehaviour
     private RigidbodyFirstPersonController rb_move;
     public bool change = false;
     public Inventory inventory;
+    MouseLook controlScript;
 
     private void Start()
     {
         rb_move = GetComponent<RigidbodyFirstPersonController>();
+        controlScript = FindObjectOfType<RigidbodyFirstPersonController>().mouseLook;
     }
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I)) //если нажата кнопка I, то показывается инвентарь
+        if (controlScript.inv_button) //если нажата кнопка I, то показывается инвентарь
         {
             UICamera.SetActive(!UICamera.activeSelf);
             rb_move.enabled = !rb_move.enabled;
             //inventory.update_Text();
             change = true;
+            controlScript.inv_button = false;
         }
 
         if (obj != null && obj.win) //если объект паззла ещё в руках, а сам паззл деактивирован (головоломка решена)
@@ -42,7 +45,7 @@ public class PlayerQuestStuff : MonoBehaviour
             items.Remove(puzzle.gameObject.name);
             items_description.Remove(obj.description);
             items.Add(obj.reward.gameObject.name); //прибавляем в конец списка награду за решение паззла. Obj заполнится дальше в коде
-           
+
             Debug.Log("got" + items[items.Count - 1]);
 
             items_mesh.Add(obj.reward);
@@ -59,7 +62,7 @@ public class PlayerQuestStuff : MonoBehaviour
             if (other.gameObject.CompareTag("Puzzle")) //если же тэг другого объекта равен паззлу
             {
                 puzzle = other.gameObject; //закидываем в паззл ссылку на этот объект
-                if (Input.GetMouseButtonDown(0))
+                if (controlScript.click)
                 {
                     items.Add(puzzle.gameObject.name);
                     cam.Toast("Получен: " + puzzle.gameObject.name);
@@ -76,7 +79,7 @@ public class PlayerQuestStuff : MonoBehaviour
                 }
             }
 
-            if (other.CompareTag("Key") && Input.GetMouseButtonDown(0)) //если тэг объекта равен включу и нажата кнопка
+            if (other.CompareTag("Key") && controlScript.click) //если тэг объекта равен включу и нажата кнопка
             {
                 items.Add(other.name); //добавляем в конец списка с ключами новый ключ
                 items_mesh.Add(other.gameObject);
@@ -87,7 +90,7 @@ public class PlayerQuestStuff : MonoBehaviour
                 change = true;
             }
 
-            if (other.CompareTag("Door") && Input.GetMouseButtonDown(0)) //если дверь и кнопка нажата
+            if (other.CompareTag("Door") && controlScript.click) //если дверь и кнопка нажата
             {
                 string name = "";
                 for (int i = 0; i < other.gameObject.name.Length - 5; i++) //у двери должно быть имя типа "*_Door", перебираем каждую букву имени объекта двери кроме последних 5

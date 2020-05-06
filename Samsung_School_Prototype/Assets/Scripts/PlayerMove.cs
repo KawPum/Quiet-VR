@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
-public class PlayerMove : MonoBehaviour // писал Милованов Еремей
+public class PlayerMove : MonoBehaviour
 { 
     float[] positions = new float[2];
     bool getUp; 
@@ -12,6 +13,7 @@ public class PlayerMove : MonoBehaviour // писал Милованов Ере�
     float oldHeight;
     CapsuleCollider collider; 
     float deltaPosition = 15f;
+    MouseLook controlScript;
 
     void Start()
     {
@@ -22,6 +24,7 @@ public class PlayerMove : MonoBehaviour // писал Милованов Ере�
         positions[0] = positions[1] - deltaPosition;
         newHeight = positions[1];
         oldHeight = newHeight;
+        controlScript = FindObjectOfType<RigidbodyFirstPersonController>().mouseLook;
     }
 
 
@@ -32,8 +35,9 @@ public class PlayerMove : MonoBehaviour // писал Милованов Ере�
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + (collider.height - oldHeight) / 2, transform.localPosition.z);
         oldHeight = collider.height;
         getUp = true;
-        if (Input.GetKeyDown(KeyCode.C)) 
+        if (controlScript.down_button) 
         {
+            controlScript.down_button = false;
             Debug.Log(isCrouching);
             if (!isCrouching) //если игрок не крадётся, то есть стоит
             {

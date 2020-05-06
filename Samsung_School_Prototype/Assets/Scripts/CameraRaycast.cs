@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class CameraRaycast : MonoBehaviour // писал Кузин Данил
+public class CameraRaycast : MonoBehaviour 
 {
     Camera camera;
     public int toastDuration = 3;

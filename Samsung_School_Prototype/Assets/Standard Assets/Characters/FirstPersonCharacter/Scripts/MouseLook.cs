@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using System.Collections.Generic;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -15,8 +16,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool smooth;
         public float smoothTime = 5f;
         public bool lockCursor = true;
-
-
+        public bool click = false;
+        public bool inv_button = false;
+        public bool down_button = false;
+        List<float> startTouch = new List<float>();
+        List<bool> rotateTouch = new List<bool>();
+        List<Vector2> positionTouch = new List<Vector2>();
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
         private bool m_cursorIsLocked = true;
@@ -30,8 +35,51 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void LookRotation(Transform character, Transform camera)
         {
-            float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
-            float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
+            float yRot = 0;
+            float xRot = 0;
+            click = false;
+            //Touch touch = Input.GetTouch(Input.touches.Length-1);
+            foreach (Touch touch in Input.touches)
+            {
+                
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        if (Input.touches.Length > startTouch.Count)
+                        {
+                            startTouch.Add(0);
+                            positionTouch.Add(new Vector2());
+                            rotateTouch.Add(false);
+                        }
+                        startTouch[touch.fingerId] = Time.time;
+                        positionTouch[touch.fingerId] = touch.position;
+                        if ((touch.position.x > Screen.width * 0.3f) || (touch.position.y > Screen.height * 0.3f))
+                        {
+                            rotateTouch[touch.fingerId] = true;
+                        }
+                        break;
+                    case TouchPhase.Moved:
+                        if (rotateTouch[touch.fingerId])
+                        {
+                            yRot = touch.deltaPosition.x;
+                            xRot = touch.deltaPosition.y;
+                        }
+                        break;
+                    case TouchPhase.Ended:
+                        rotateTouch[touch.fingerId] = false;
+                        if ((Time.time - startTouch[touch.fingerId] < 1f)&&(Math.Abs(touch.position.x - positionTouch[touch.fingerId].x)<0.05f) && (Math.Abs(touch.position.y - positionTouch[touch.fingerId].y) < 0.05f))
+                        {
+                            if (!inv_button && !down_button)
+                            {
+                                Debug.Log("click");
+                                click = true;
+                            }
+                        }
+                        break;
+                }
+            }
+            //float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
+            //float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 
             m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
@@ -83,16 +131,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_cursorIsLocked = true;
             }
 
-            if (m_cursorIsLocked)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            else if (!m_cursorIsLocked)
-            {
+            //if (m_cursorIsLocked)
+            //{
+            //    Cursor.lockState = CursorLockMode.Locked;
+            //    Cursor.visible = false;
+            //}
+            //else if (!m_cursorIsLocked)
+            //{
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-            }
+            //}
         }
 
         Quaternion ClampRotationAroundXAxis(Quaternion q)

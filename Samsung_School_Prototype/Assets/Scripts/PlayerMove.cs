@@ -37,7 +37,6 @@ public class PlayerMove : MonoBehaviour
         getUp = true;
         if (controlScript.down_button) 
         {
-            controlScript.down_button = false;
             Debug.Log(isCrouching);
             if (!isCrouching) //если игрок не крадётся, то есть стоит
             {
@@ -50,5 +49,6 @@ public class PlayerMove : MonoBehaviour
                 isCrouching = false;
             }
         }
+        controlScript.down_button = false;
     }
 }

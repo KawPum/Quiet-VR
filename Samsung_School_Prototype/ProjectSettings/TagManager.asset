@@ -17,6 +17,7 @@ TagManager:
   - WardrobeShake
   - Inventory_Button
   - Down_Button
+  - Photo
   layers:
   - Default
   - TransparentFX

@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + (collider.height - oldHeight) / 2, transform.localPosition.z);
         oldHeight = collider.height;
         getUp = true;
-        if (controlScript.down_button) 
+        if (controlScript.down_button==1) 
         {
             Debug.Log(isCrouching);
             if (!isCrouching) //если игрок не крадётся, то есть стоит
@@ -48,7 +48,7 @@ public class PlayerMove : MonoBehaviour
                 newHeight = positions[1];
                 isCrouching = false;
             }
+            controlScript.down_button = 2;
         }
-        controlScript.down_button = false;
     }
 }

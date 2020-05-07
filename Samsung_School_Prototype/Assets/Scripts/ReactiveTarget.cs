@@ -16,13 +16,26 @@ public class ReactiveTarget : MonoBehaviour
     float posClose;
     DoorScript door;
     MouseLook controlScript;
+    Transform cubePuzzle;
 
     // Start is called before the first frame update
     void Start()
     {
         door = gameObject.GetComponent<DoorScript>();
         parent = transform.parent;
-        col = transform.gameObject.GetComponent<Renderer>().material.color;
+        if (!transform.CompareTag("Puzzle")) col = transform.gameObject.GetComponent<Renderer>().material.color;
+        else
+        {
+            foreach(Transform i in transform.GetComponentsInChildren<Transform>())
+            {
+                if(i.gameObject.name == "Cube (1)")
+                {
+                    cubePuzzle = i;
+                    break;
+                }
+            }
+            col = cubePuzzle.gameObject.GetComponent<Renderer>().material.color;
+        }
         angle = transform.eulerAngles.y;
         posClose = transform.localPosition.z;
         posOpen = posClose + deltaPostion;
@@ -42,15 +55,16 @@ public class ReactiveTarget : MonoBehaviour
 
     public void setOriginalColor()
     {
-        transform.gameObject.GetComponent<Renderer>().material.color = col;
+        if (!transform.CompareTag("Puzzle")) transform.gameObject.GetComponent<Renderer>().material.color = col;
+        else cubePuzzle.gameObject.GetComponent<Renderer>().material.color = col;
     }
 
 
     public string React()
     {
-        
-        transform.gameObject.GetComponent<Renderer>().material.color = new Color(1, 0.96f, 0.321f, 0);
-        if (parent.gameObject.tag == "Wardrobe")
+        if(!transform.CompareTag("Puzzle"))transform.gameObject.GetComponent<Renderer>().material.color = new Color(1, 0.96f, 0.321f, 0);
+        else cubePuzzle.gameObject.GetComponent<Renderer>().material.color = col;
+        if ((transform.parent != null) && (parent.gameObject.tag == "Wardrobe"))
         {
             if (ObjectId != 0)
             {
@@ -94,6 +108,7 @@ public class ReactiveTarget : MonoBehaviour
             }
             return "открыть/зкарыть";
         }
+
         if (transform.tag == "Case")
         {
             if (controlScript.click)
@@ -116,6 +131,58 @@ public class ReactiveTarget : MonoBehaviour
             }
             return ("трясти");
         }
+
+
+        Debug.Log(transform.tag);
+        //if (transform.CompareTag("Puzzle")) //если же тэг другого объекта равен паззлу
+        //{
+        //    puzzle = transform.gameObject; //закидываем в паззл ссылку на этот объект
+        //    if (controlScript.click)
+        //    {
+        //        items.Add(puzzle.gameObject.name);
+        //        cam.Toast("Получен: " + puzzle.gameObject.name);
+        //        puzzle.transform.position = new Vector3(0f, 0f, 0f);
+        //        foreach (Transform child in puzzle.GetComponentsInChildren<Transform>())
+        //        {
+        //            child.gameObject.layer = 5;
+        //        }
+        //        obj = puzzle.GetComponent<ObjectRotate>(); // кидаем в ссылку компонент ObjectInspect паззла
+        //        items_mesh.Add(puzzle);
+        //        obj.inHand = true; // сообщаем компоненту, что паззл в руках
+        //                           //inventory.update_Text();
+        //        change = true;
+        //    }
+        //}
+
+        //if (other.CompareTag("Key") && controlScript.click) //если тэг объекта равен включу и нажата кнопка
+        //{
+        //    items.Add(other.name); //добавляем в конец списка с ключами новый ключ
+        //    items_mesh.Add(other.gameObject);
+        //    other.GetComponent<ObjectRotate>().inHand = true;
+        //    cam.Toast("Получен: " + other.name);
+        //    other.SetActive(false); //скрываем объект ключа, типа он удалился/исчез/мы его взяли
+        //                            //inventory.update_Text();
+        //    change = true;
+        //}
+
+        //if (other.CompareTag("Door") && controlScript.click) //если дверь и кнопка нажата
+        //{
+        //    string name = "";
+        //    for (int i = 0; i < other.gameObject.name.Length - 5; i++) //у двери должно быть имя типа "*_Door", перебираем каждую букву имени объекта двери кроме последних 5
+        //    {
+        //        name += other.gameObject.name[i]; //записываем в стрингу имя двери без _Door
+        //    }
+        //    for (int i = 0; i < items.Count; i++)
+        //    {
+        //        if (items[i] == name) //если имя ключа совпадает с именем двери. Имена соответствующих ключей и дверей должны отличаться только последними 5ю символами _Door
+        //        {
+        //            items.Remove(name); //удаляем ключ из списка
+        //            items_mesh.Remove(items_mesh[i]);
+        //            cam.Toast("Использован: " + name);
+        //            other.GetComponent<DoorScript>().closed = false;
+        //        }
+        //    }
+        //}
 
         return "";
     }

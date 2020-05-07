@@ -29,7 +29,7 @@ public class Buttons : MonoBehaviour
                 Debug.Log("inventory button");
                 break;
             case "Down_Button":
-                controlScript.down_button = true;
+                controlScript.down_button = 1;
                 Debug.Log("down button");
                 break;
         }

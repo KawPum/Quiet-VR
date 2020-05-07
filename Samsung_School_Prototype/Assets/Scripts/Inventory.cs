@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Inventory : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class Inventory : MonoBehaviour
     Text[] names_output = new Text[5];
     private GameObject subject;
     public Text description;
+
+    bool inv_left = false;
+    bool inv_right = false;
+    float touchStartPosition = 0;
 
     void Start()
     {
@@ -28,15 +33,46 @@ public class Inventory : MonoBehaviour
     void Update()
     {
 
+        inventoryControl();
+
         if (player_object.change)
         {
             update_Text();
             player_object.change = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow)) switch_Item(1);
+        if (inv_right)
+        {
+            inv_right = false;
+            switch_Item(1);
+        }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) switch_Item(-1);
+        if (inv_left)
+        {
+            inv_left = false;
+            switch_Item(-1);
+        }
+    }
+
+    void inventoryControl()
+    {
+        if (Input.touches.Length == 1)
+        {
+            switch (Input.touches[0].phase)
+            {
+                case TouchPhase.Began:
+                    touchStartPosition = Input.touches[0].position.x;
+                    break;
+                case TouchPhase.Ended:
+                    Debug.Log("Height " + Screen.height + " Width " + Screen.width);
+                    Debug.Log(touchStartPosition);
+                    if (Input.touches[0].position.x - touchStartPosition > Screen.width / 30f) inv_left = true;
+                    else if (touchStartPosition - Input.touches[0].position.x > Screen.width / 30f) inv_right = true;
+                    Debug.Log("right " + inv_right);
+                    Debug.Log("left " + inv_left);
+                    break;
+            }
+        }
     }
 
     void switch_Item(int step)

@@ -20,6 +20,9 @@ public class ReactiveTarget : MonoBehaviour
     Material originalMaterial;
     PlayerQuestStuff playerQuestStuff;
     GameObject inv_add;
+    Material standartMaterial;
+    Color yellow;
+    Color red;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,9 @@ public class ReactiveTarget : MonoBehaviour
         changePosition = posOpen * opened - (posClose * (opened - 1));
         controlScript = FindObjectOfType<RigidbodyFirstPersonController>().mouseLook;
         playerQuestStuff = FindObjectOfType<PlayerQuestStuff>();
+        standartMaterial = new Material(Shader.Find("Standard"));
+        yellow = new Color(1, 0.96f, 0.321f, 0);
+        red = new Color(1, 0.48f, 0.46f, 0);
     }
 
     // Update is called once per frame
@@ -67,8 +73,8 @@ public class ReactiveTarget : MonoBehaviour
 
     public string React()
     {
-        changeColorObject.gameObject.GetComponent<Renderer>().material = new Material(Shader.Find("Standard"));
-        changeColorObject.gameObject.GetComponent<Renderer>().material.color = new Color(1, 0.96f, 0.321f, 0);
+        changeColorObject.gameObject.GetComponent<Renderer>().material = standartMaterial;
+        changeColorObject.gameObject.GetComponent<Renderer>().material.color = yellow;
 
         if ((transform.parent != null) && (parent.gameObject.tag == "Wardrobe"))
         {
@@ -79,7 +85,7 @@ public class ReactiveTarget : MonoBehaviour
             else
             {
                 string text = parent.GetComponent<WardrobeSecret>().getTextOpened();
-                if (text == "заперто") changeColorObject.gameObject.GetComponent<Renderer>().material.color = new Color(1, 0.48f, 0.46f, 0);
+                if (text == "заперто") changeColorObject.gameObject.GetComponent<Renderer>().material.color = red;
                 return text;
             }
         }
@@ -90,7 +96,7 @@ public class ReactiveTarget : MonoBehaviour
             case "Door":
                 if ((door != null) && (door.closed))
                 {
-                    changeColorObject.gameObject.GetComponent<Renderer>().material.color = new Color(1, 0.48f, 0.46f, 0);
+                    changeColorObject.gameObject.GetComponent<Renderer>().material.color = red;
                     return "Заперто! Нужен ключ.";
                 }
                 return "открыть/зкарыть";

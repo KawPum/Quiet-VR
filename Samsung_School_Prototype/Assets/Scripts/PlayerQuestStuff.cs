@@ -35,6 +35,9 @@ public class PlayerQuestStuff : MonoBehaviour
         {
             UICamera.SetActive(!UICamera.activeSelf);
             rb_move.enabled = !rb_move.enabled;
+            inventory.enabled = !inventory.enabled;
+            inventory.scale = 0.5f;
+            items_mesh[0].GetComponent<ObjectRotate>().enabled = !items_mesh[0].GetComponent<ObjectRotate>().enabled;
             //inventory.update_Text();
             change = true;
             controlScript.inv_button = false;
@@ -51,6 +54,8 @@ public class PlayerQuestStuff : MonoBehaviour
 
             items_mesh.Add(obj.reward);
             Destroy(puzzle);
+            inventory.scale = 0.5f;
+            items_mesh[0].GetComponent<ObjectRotate>().enabled = true;
             obj.win = false;
             //inventory.update_Text();
             change = true;
@@ -62,7 +67,6 @@ public class PlayerQuestStuff : MonoBehaviour
     {
         items[0] = new_obj.reward.gameObject.name;
         items_mesh[0] = new_obj.reward.gameObject;
-
         Debug.Log("got" + items[items.Count - 1]);
 
         obj.win = false;

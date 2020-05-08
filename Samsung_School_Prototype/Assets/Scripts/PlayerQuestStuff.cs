@@ -16,7 +16,7 @@ public class PlayerQuestStuff : MonoBehaviour
     public Text keyText; // output for keys and items
     public Text itemsText; //текст, отвечающий за отображение инфы о предметах
     public CameraRaycast cam; //ссылка на камеру
-    private ObjectRotate obj; //пустая ссылка для экземпляра класса ObjectInspect. в коде пригодится дальше
+    public ObjectRotate obj; //пустая ссылка для экземпляра класса ObjectInspect. в коде пригодится дальше
     private RigidbodyFirstPersonController rb_move;
     public bool change = false;
     public Inventory inventory;
@@ -56,13 +56,6 @@ public class PlayerQuestStuff : MonoBehaviour
             change = true;
         }
 
-        //RaycastHit hit;
-        //if ((Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 30f)))
-        //{
-        //    GameObject other = hit.transform.gameObject;
-
-           
-        //}
     }
 
     public void get_Reward(ObjectRotate new_obj)

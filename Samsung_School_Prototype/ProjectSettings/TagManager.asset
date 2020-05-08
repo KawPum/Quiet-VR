@@ -18,6 +18,7 @@ TagManager:
   - Inventory_Button
   - Down_Button
   - Photo
+  - ChangeColorElement
   layers:
   - Default
   - TransparentFX

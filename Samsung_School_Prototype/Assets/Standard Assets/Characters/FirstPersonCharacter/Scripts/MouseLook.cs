@@ -81,6 +81,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                             {
                                 Debug.Log("click");
                                 click = true;
+
                             }
                         }
 

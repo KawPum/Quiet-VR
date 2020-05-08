@@ -14,6 +14,7 @@ public class CameraRaycast : MonoBehaviour
     GameObject lastHit = null;
     RigidbodyFirstPersonController player;
     PlayerQuestStuff quest;
+    MouseLook controlScript;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class CameraRaycast : MonoBehaviour
         camera = GetComponent<Camera>();
         player = transform.parent.GetComponent<RigidbodyFirstPersonController>();
         quest = transform.parent.GetComponent<PlayerQuestStuff>();
+        controlScript = player.mouseLook;
         toastTime = toastDuration;
         style = new GUIStyle(GUI.skin.window);
     }
@@ -39,6 +41,10 @@ public class CameraRaycast : MonoBehaviour
             if (target != null)
             {
                 text = target.React();
+                if(controlScript.click == true)
+                {
+                    target.clickReact();
+                }
                 if ((lastHit != null) && (lastHit != hitObject))
                 {
                     lastHit.GetComponent<ReactiveTarget>().setOriginalColor();

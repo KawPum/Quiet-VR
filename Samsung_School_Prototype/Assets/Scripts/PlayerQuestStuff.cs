@@ -6,6 +6,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerQuestStuff : MonoBehaviour 
 {
+    public Transform canv;
     public GameObject UICamera; // inventory ui, здесь ссылка на канвас, отвечающий за весь ЮИ
     private GameObject puzzle; // empty object for puzzle
     public Transform item_position; // empty object for puzzle's location
@@ -21,11 +22,19 @@ public class PlayerQuestStuff : MonoBehaviour
     public bool change = false;
     public Inventory inventory;
     MouseLook controlScript;
+    Rigidbody rb;
+    GameObject canvMove;
+    GameObject canvInv;
+    Image canvStick;
 
     private void Start()
     {
+        canvMove = canv.Find("move").gameObject;
+        
+        canvInv = canv.Find("inventory").gameObject;
         rb_move = GetComponent<RigidbodyFirstPersonController>();
         controlScript = FindObjectOfType<RigidbodyFirstPersonController>().mouseLook;
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -33,16 +42,27 @@ public class PlayerQuestStuff : MonoBehaviour
     {
         if (controlScript.inv_button) //если нажата кнопка I, то показывается инвентарь
         {
+            foreach(Transform child in canvMove.GetComponentsInChildren<Transform>())
+            {
+                if(child.GetComponent<Image>()!=null) child.GetComponent<Image>().enabled = !child.GetComponent<Image>().enabled;
+            }
+            inventory.enabled = !inventory.enabled;
+            canvInv.SetActive(!canvInv.activeSelf);
             UICamera.SetActive(!UICamera.activeSelf);
             rb_move.enabled = !rb_move.enabled;
-            inventory.enabled = !inventory.enabled;
+            rb.velocity = new Vector3(0, 0 ,0);
             inventory.scale = 0.5f;
-            items_mesh[0].GetComponent<ObjectRotate>().enabled = !items_mesh[0].GetComponent<ObjectRotate>().enabled;
+            if (items.Count > 0)
+            {
+                items_mesh[0].GetComponent<ObjectRotate>().enabled = !items_mesh[0].GetComponent<ObjectRotate>().enabled;
+            }
             //inventory.update_Text();
             change = true;
             controlScript.inv_button = false;
             controlScript.setRotateTouchFalse();
         }
+
+        
 
         if (obj != null && obj.win) //если объект паззла ещё в руках, а сам паззл деактивирован (головоломка решена)
         {

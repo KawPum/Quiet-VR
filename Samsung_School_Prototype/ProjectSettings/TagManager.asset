@@ -19,6 +19,8 @@ TagManager:
   - Down_Button
   - Photo
   - ChangeColorElement
+  - Inv_Left
+  - Inv_Right
   layers:
   - Default
   - TransparentFX

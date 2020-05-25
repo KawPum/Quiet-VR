@@ -13,10 +13,12 @@ public class Inventory : MonoBehaviour
     private GameObject subject;
     public Text description;
 
-    bool inv_left = false;
-    bool inv_right = false;
+    public bool inv_left = false;
+    public bool inv_right = false;
     float touchStartPosition = 0;
     bool lastScale = false;
+    public Vector3 rotation = new Vector3(0,0,0);
+    public float k = 100f;
 
     public float scale = 0.5f;
 
@@ -68,8 +70,19 @@ public class Inventory : MonoBehaviour
                     case TouchPhase.Began:
                         touchStartPosition = Input.touches[0].position.x;
                         break;
+                    case TouchPhase.Moved:
+                        if (!lastScale)
+                        {
+                            rotation.y += Input.touches[0].deltaPosition.y * k;
+                            rotation.x += Input.touches[0].deltaPosition.x * k;
+                        }
+                        break;
                     case TouchPhase.Ended:
-                        if (!lastScale) { 
+                        lastScale = false;
+                        break;
+
+                        /*if (!lastScale){ 
+                            if()
                             Debug.Log("Height " + Screen.height + " Width " + Screen.width);
                             Debug.Log(touchStartPosition);
                             if (Input.touches[0].position.x - touchStartPosition > Screen.width / 30f) inv_left = true;
@@ -77,9 +90,16 @@ public class Inventory : MonoBehaviour
                             Debug.Log("right " + inv_right);
                             Debug.Log("left " + inv_left);
                             scale = 0.5f;
-                        }
-                        lastScale = false;
-                        break;
+                        }*/
+                        /*if ((Time.time - startTouch[touch.fingerId] < 0.3f) && (Math.Abs(touch.position.x - positionTouch[touch.fingerId].x) < Screen.width / 50f) && (Math.Abs(touch.position.y - positionTouch[touch.fingerId].y) < Screen.height / 50f))
+                        {
+                            if (!inv_button && (down_button == 0))
+                            {
+                                Debug.Log("click");
+                                click = true;
+
+                            }
+                        }*/
                 }
                 break;
 
@@ -91,7 +111,7 @@ public class Inventory : MonoBehaviour
                 }
                 else if ((Input.touches[1].phase == TouchPhase.Moved) || (Input.touches[0].phase == TouchPhase.Moved))
                 {
-                    scale += (float)(Math.Pow((Math.Pow(Input.touches[0].position.x - Input.touches[1].position.x, 2) + Math.Pow(Input.touches[0].position.y - Input.touches[1].position.y, 2)), 0.5) - touchStartPosition) * 0.005f;
+                    scale += (float)(Math.Pow((Math.Pow(Input.touches[0].position.x - Input.touches[1].position.x, 2) + Math.Pow(Input.touches[0].position.y - Input.touches[1].position.y, 2)), 0.5) - touchStartPosition) * 0.0005f;
                     if (scale < 0.5f) scale = 0.5f;
                     else if (scale > 1.5f) scale = 1.5f;
                 }
@@ -101,41 +121,44 @@ public class Inventory : MonoBehaviour
 
     void switch_Item(int step)
     {
-        player_object.items_mesh[0].GetComponent<ObjectRotate>().enabled = false;
-        Destroy(subject.gameObject);
-        string temp;
-        GameObject temp_mesh;
-        if (step < 0) //move to the right
+        if (player_object.items.Count > 0)
         {
-            temp = player_object.items[player_object.items.Count-1];
-            temp_mesh = player_object.items_mesh[player_object.items.Count - 1];
-            //  Debug.Log(temp);
-            for (int i = player_object.items.Count-1; i > 0; i--)
+            player_object.items_mesh[0].GetComponent<ObjectRotate>().enabled = false;
+            Destroy(subject.gameObject);
+            string temp;
+            GameObject temp_mesh;
+            if (step < 0) //move to the right
             {
-                player_object.items[i] = player_object.items[i - 1];
-                player_object.items_mesh[i] = player_object.items_mesh[i - 1];
+                temp = player_object.items[player_object.items.Count - 1];
+                temp_mesh = player_object.items_mesh[player_object.items.Count - 1];
+                //  Debug.Log(temp);
+                for (int i = player_object.items.Count - 1; i > 0; i--)
+                {
+                    player_object.items[i] = player_object.items[i - 1];
+                    player_object.items_mesh[i] = player_object.items_mesh[i - 1];
+                }
+                // Debug.Log(temp);
+                player_object.items[0] = temp;
+                player_object.items_mesh[0] = temp_mesh;
             }
-            // Debug.Log(temp);
-            player_object.items[0] = temp;
-            player_object.items_mesh[0] = temp_mesh;
-        }
 
-        else if (step > 0)
-        {
-            temp = player_object.items[0];
-            temp_mesh = player_object.items_mesh[0];
-            //  Debug.Log(temp);
-            for (int i = 0; i < player_object.items.Count-1; i++)
+            else if (step > 0)
             {
-                player_object.items[i] = player_object.items[i+1];
-                player_object.items_mesh[i] = player_object.items_mesh[i + 1];
+                temp = player_object.items[0];
+                temp_mesh = player_object.items_mesh[0];
+                //  Debug.Log(temp);
+                for (int i = 0; i < player_object.items.Count - 1; i++)
+                {
+                    player_object.items[i] = player_object.items[i + 1];
+                    player_object.items_mesh[i] = player_object.items_mesh[i + 1];
+                }
+                player_object.items[player_object.items.Count - 1] = temp;
+                player_object.items_mesh[player_object.items.Count - 1] = temp_mesh;
             }
-            player_object.items[player_object.items.Count-1] = temp;
-            player_object.items_mesh[player_object.items.Count - 1] = temp_mesh;
+            player_object.items_mesh[0].transform.localScale = new Vector3(scale, scale, scale);
+            player_object.items_mesh[0].GetComponent<ObjectRotate>().enabled = true;
+            update_Text();
         }
-        player_object.items_mesh[0].transform.localScale = new Vector3(scale, scale, scale);
-        player_object.items_mesh[0].GetComponent<ObjectRotate>().enabled = true;
-        update_Text();
     }
 
     public void update_Text()

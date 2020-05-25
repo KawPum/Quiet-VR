@@ -23,6 +23,7 @@ public class ReactiveTarget : MonoBehaviour
     Material standartMaterial;
     Color yellow;
     Color red;
+    Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,7 @@ public class ReactiveTarget : MonoBehaviour
         controlScript = FindObjectOfType<RigidbodyFirstPersonController>().mouseLook;
         playerQuestStuff = FindObjectOfType<PlayerQuestStuff>();
         standartMaterial = new Material(Shader.Find("Standard"));
+        rb = GameObject.Find("RigidBodyFPSController").GetComponent<Rigidbody>();
         yellow = new Color(1, 0.96f, 0.321f, 0);
         red = new Color(1, 0.48f, 0.46f, 0);
     }
@@ -155,6 +157,7 @@ public class ReactiveTarget : MonoBehaviour
 
             case "WardrobeShake":
                 FindObjectOfType<RigidbodyFirstPersonController>().enabled = false;
+                rb.velocity = new Vector3(0, 0, 0);
                 parent.GetComponent<Shaking>().enabled = true;
                 parent.GetComponent<Shaking>().score = 0;
                 parent.GetComponent<Shaking>().got = 0;

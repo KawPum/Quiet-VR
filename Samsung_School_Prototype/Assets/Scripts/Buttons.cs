@@ -7,9 +7,11 @@ public class Buttons : MonoBehaviour
 {
 
     MouseLook controlScript;
+    public Inventory inventoryScript = null;
     // Start is called before the first frame update
     void Start()
     {
+        //inventoryScript = FindObjectOfType<Inventory>();
         controlScript = FindObjectOfType<RigidbodyFirstPersonController>().mouseLook;
     }
 
@@ -31,6 +33,16 @@ public class Buttons : MonoBehaviour
             case "Down_Button":
                 controlScript.down_button = 1;
                 Debug.Log("down button");
+                break;
+            case "Inv_Right":
+                inventoryScript.inv_right = true;
+                inventoryScript.rotation = new Vector3(0, 0, 0);
+                Debug.Log("Inv_right");
+                break;
+            case "Inv_Left":
+                inventoryScript.inv_left = true;
+                inventoryScript.rotation = new Vector3(0, 0, 0);
+                Debug.Log("Inv_left");
                 break;
         }
     }

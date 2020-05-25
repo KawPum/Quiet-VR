@@ -44,6 +44,7 @@ public class CameraRaycast : MonoBehaviour
                 if(controlScript.click == true)
                 {
                     target.clickReact();
+                    controlScript.click = false;
                 }
                 if ((lastHit != null) && (lastHit != hitObject))
                 {

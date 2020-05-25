@@ -18,6 +18,8 @@ ScriptsOnlyBuild:
     - ReactiveTarget
     - Shaking
     - WardrobeSecret
+    Oculus.VR.Editor.dll:
+    - OVRConfig
     Oculus.VR.dll:
     - OVRGrabbable
     Unity.Postprocessing.Runtime.dll:
@@ -42,6 +44,8 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
     - UnityEditor.Graphs.AnimatorControllerTool
+    UnityEditor.TestRunner.dll:
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -145,6 +149,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11162}
     - Class: 114
       Script: {instanceID: 11418}
+    - Class: 114
+      Script: {instanceID: 11542}
     - Class: 114
       Script: {instanceID: 11544}
     - Class: 114
@@ -548,18 +554,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMove
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements
-    className: CallbackExecutor
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements.Editor
-    className: Placeholder
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -1216,7 +1210,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: c1e730ed216775c4c6ee73bcc6195298
+      Hash: 0030134fbf8cdba91dd782a3751215d6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ObjectRotate
@@ -1462,6 +1456,12 @@ ScriptsOnlyBuild:
     className: FollowTarget
   - hash:
       serializedVersion: 2
+      Hash: b00ce1f32326f1cd1160488ffd14965a
+    assemblyName: Oculus.VR.Editor.dll
+    namespaceName: 
+    className: OVRConfig
+  - hash:
+      serializedVersion: 2
       Hash: 81c828fc4a09b55fe5a54cd44f319b0c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1510,7 +1510,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 2bc8d2556681cc839c981681e5499da6
+      Hash: c7ee0653dba018fb2d4e2220530160af
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerQuestStuff
@@ -1522,7 +1522,7 @@ ScriptsOnlyBuild:
     className: PostProcessVolume
   - hash:
       serializedVersion: 2
-      Hash: 709f735bb983b1c9a2adff5b484014c7
+      Hash: dc54feef6c6f666f98936a878abb98a4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Inventory
@@ -1540,7 +1540,7 @@ ScriptsOnlyBuild:
     className: TextMeshPro
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 7b0f1dcf27382ea7bc0cade93243dfe4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Buttons

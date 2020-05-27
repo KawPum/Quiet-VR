@@ -21,6 +21,7 @@ TagManager:
   - ChangeColorElement
   - Inv_Left
   - Inv_Right
+  - flashlightButton
   layers:
   - Default
   - TransparentFX

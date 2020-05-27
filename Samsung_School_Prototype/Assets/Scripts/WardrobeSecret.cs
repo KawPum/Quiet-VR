@@ -29,11 +29,11 @@ public class WardrobeSecret : MonoBehaviour // писал Кузин Данил
         {
             wardrobeCase = GameObject.Find("Sphere.00" + (i + 1));
             casesOpen[i] = 0;
-            changePosition[i] = wardrobeCase.transform.localPosition.z;
+            changePosition[i] = wardrobeCase.transform.localPosition.y;
         }
         secretCasePosition = changePosition[0];
         posClose = changePosition[0];
-        posOpen = posClose + 10f;
+        posOpen = posClose - 0.01f;
         open(2);
         open(3);
     }
@@ -44,7 +44,7 @@ public class WardrobeSecret : MonoBehaviour // писал Кузин Данил
         for (int i = 0; i < 6; i++)
         {
             wardrobeCase = GameObject.Find("Sphere.00" + (i + 1));
-            wardrobeCase.transform.localPosition = Vector3.Lerp(wardrobeCase.transform.localPosition, new Vector3(wardrobeCase.transform.localPosition.x, wardrobeCase.transform.localPosition.y, changePosition[i]), 1.5f * Time.deltaTime);
+            wardrobeCase.transform.localPosition = Vector3.Lerp(wardrobeCase.transform.localPosition, new Vector3(wardrobeCase.transform.localPosition.x, changePosition[i], wardrobeCase.transform.localPosition.z), 1.5f * Time.deltaTime);
             if (secret != -1)
             {
                 secret += casesOpen[i];
@@ -58,7 +58,7 @@ public class WardrobeSecret : MonoBehaviour // писал Кузин Данил
         }
         else if (secret != -1) secret = 0;
         wardrobeCase = GameObject.Find("Sphere");
-        wardrobeCase.transform.localPosition = Vector3.Lerp(wardrobeCase.transform.localPosition, new Vector3(wardrobeCase.transform.localPosition.x, wardrobeCase.transform.localPosition.y, secretCasePosition), 1.5f * Time.deltaTime);
+        wardrobeCase.transform.localPosition = Vector3.Lerp(wardrobeCase.transform.localPosition, new Vector3(wardrobeCase.transform.localPosition.x, secretCasePosition, wardrobeCase.transform.localPosition.z), 1.5f * Time.deltaTime);
     }
 
     void puzzle(int ObjectId)

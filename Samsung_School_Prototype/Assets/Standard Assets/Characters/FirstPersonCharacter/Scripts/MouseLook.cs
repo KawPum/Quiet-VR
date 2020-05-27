@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool click = false;
         public bool inv_button = false;
         public int down_button = 0;
+        public bool flashlight = false;
         List<float> startTouch = new List<float>();
         List<bool> rotateTouch = new List<bool>();
         List<Vector2> positionTouch = new List<Vector2>();
@@ -35,7 +36,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void setRotateTouchFalse()
         {
-            for(int i = 0; i < rotateTouch.Count; i++)
+            for (int i = 0; i < rotateTouch.Count; i++)
             {
                 rotateTouch[i] = false;
             }
@@ -62,7 +63,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         }
                         startTouch[touch.fingerId] = Time.time;
                         positionTouch[touch.fingerId] = touch.position;
-                        if ((touch.position.x > Screen.width * 0.3f) || (touch.position.y > Screen.height * 0.3f))
+                        if ((touch.position.x > Screen.width * 0.3f) || (touch.position.y > Screen.height * 0.6f))
                         {
                             rotateTouch[touch.fingerId] = true;
                         }
@@ -77,12 +78,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     case TouchPhase.Ended:
                         if ((Time.time - startTouch[touch.fingerId] < 0.3f) && (Math.Abs(touch.position.x - positionTouch[touch.fingerId].x) < Screen.width / 50f) && (Math.Abs(touch.position.y - positionTouch[touch.fingerId].y) < Screen.height / 50f))
                         {
-                            if (!inv_button && (down_button == 0))
+                            if (!inv_button && (down_button == 0) && !flashlight)
                             {
                                 Debug.Log("click");
                                 click = true;
 
                             }
+                            if (flashlight) flashlight = false;
                         }
 
                         rotateTouch[touch.fingerId] = false;
@@ -92,11 +94,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (down_button == 2) down_button = 0;
             m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
-            
+
             //float yRot = CrossPlatformInputManager.GetAxis("Mouse sX") * XSensitivity;
             //float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 
-            
+
 
             if (clampVerticalRotation)
                 m_CameraTargetRot = ClampRotationAroundXAxis(m_CameraTargetRot);

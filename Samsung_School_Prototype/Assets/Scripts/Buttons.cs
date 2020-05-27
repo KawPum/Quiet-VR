@@ -8,6 +8,7 @@ public class Buttons : MonoBehaviour
 
     MouseLook controlScript;
     public Inventory inventoryScript = null;
+    public GameObject flashlight;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class Buttons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnClick()
@@ -43,6 +44,11 @@ public class Buttons : MonoBehaviour
                 inventoryScript.inv_left = true;
                 inventoryScript.rotation = new Vector3(0, 0, 0);
                 Debug.Log("Inv_left");
+                break;
+            case "flashlightButton":
+                flashlight.SetActive(!flashlight.activeSelf);
+                controlScript.flashlight = true;
+                Debug.Log("flashligh");
                 break;
         }
     }

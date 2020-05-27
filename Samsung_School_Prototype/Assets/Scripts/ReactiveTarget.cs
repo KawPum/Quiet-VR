@@ -24,6 +24,9 @@ public class ReactiveTarget : MonoBehaviour
     Color yellow;
     Color red;
     Rigidbody rb;
+    public int X = 0;
+    public int Y = 0;
+    public int Z = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +36,21 @@ public class ReactiveTarget : MonoBehaviour
         changeColorObject = getChangeColorObject();
         originalMaterial = changeColorObject.gameObject.GetComponent<Renderer>().material;
         angle = transform.eulerAngles.y;
-        posClose = transform.localPosition.z;
-        posOpen = posClose + deltaPostion;
+        if (Z != 0)
+        {
+            posClose = transform.localPosition.z;
+            posOpen = posClose + deltaPostion * Z;
+        }
+        else if (Y != 0)
+        {
+            posClose = transform.localPosition.y;
+            posOpen = posClose + deltaPostion * Y;
+        }
+        else
+        {
+            posClose = transform.localPosition.x;
+            posOpen = posClose + deltaPostion * X;
+        }
         changePosition = posOpen * opened - (posClose * (opened - 1));
         controlScript = FindObjectOfType<RigidbodyFirstPersonController>().mouseLook;
         playerQuestStuff = FindObjectOfType<PlayerQuestStuff>();
@@ -50,7 +66,7 @@ public class ReactiveTarget : MonoBehaviour
         if ((transform.tag != "WardrobeShake"))
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, angle, transform.eulerAngles.z), 2f * Time.deltaTime);
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(transform.localPosition.x, transform.localPosition.y, changePosition), 2f * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3((X == 0) ? transform.localPosition.x : changePosition, (Y == 0) ? transform.localPosition.y : changePosition, (Z == 0) ? transform.localPosition.z : changePosition), 2f * Time.deltaTime);
         }
     }
 
@@ -195,7 +211,7 @@ public class ReactiveTarget : MonoBehaviour
         {
             if (ObjectId != 0)
             {
-                    parent.GetComponent<WardrobeSecret>().openCases(ObjectId);
+                parent.GetComponent<WardrobeSecret>().openCases(ObjectId);
             }
             else
             {

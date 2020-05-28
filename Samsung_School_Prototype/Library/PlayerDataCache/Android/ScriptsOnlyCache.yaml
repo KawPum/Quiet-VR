@@ -99,75 +99,75 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9458}
+      Script: {instanceID: 9548}
     - Class: 114
-      Script: {instanceID: 9492}
+      Script: {instanceID: 9582}
     - Class: 114
-      Script: {instanceID: 9598}
+      Script: {instanceID: 9688}
     - Class: 114
-      Script: {instanceID: 9742}
+      Script: {instanceID: 9832}
     - Class: 114
-      Script: {instanceID: 9744}
+      Script: {instanceID: 9834}
     - Class: 114
-      Script: {instanceID: 9750}
+      Script: {instanceID: 9840}
     - Class: 114
-      Script: {instanceID: 9756}
+      Script: {instanceID: 9846}
     - Class: 114
-      Script: {instanceID: 9764}
-    - Class: 114
-      Script: {instanceID: 9766}
-    - Class: 114
-      Script: {instanceID: 9800}
-    - Class: 114
-      Script: {instanceID: 9802}
+      Script: {instanceID: 9854}
     - Class: 114
       Script: {instanceID: 9856}
     - Class: 114
-      Script: {instanceID: 9916}
+      Script: {instanceID: 9890}
     - Class: 114
-      Script: {instanceID: 10038}
+      Script: {instanceID: 9892}
     - Class: 114
-      Script: {instanceID: 10286}
+      Script: {instanceID: 9946}
     - Class: 114
-      Script: {instanceID: 10398}
+      Script: {instanceID: 10006}
     - Class: 114
-      Script: {instanceID: 10428}
+      Script: {instanceID: 10128}
     - Class: 114
-      Script: {instanceID: 10484}
+      Script: {instanceID: 10376}
     - Class: 114
-      Script: {instanceID: 10562}
+      Script: {instanceID: 10488}
     - Class: 114
-      Script: {instanceID: 10742}
+      Script: {instanceID: 10518}
     - Class: 114
-      Script: {instanceID: 10824}
+      Script: {instanceID: 10574}
     - Class: 114
-      Script: {instanceID: 10852}
+      Script: {instanceID: 10652}
     - Class: 114
-      Script: {instanceID: 10968}
+      Script: {instanceID: 10832}
     - Class: 114
-      Script: {instanceID: 11094}
+      Script: {instanceID: 10914}
     - Class: 114
-      Script: {instanceID: 11132}
+      Script: {instanceID: 10942}
     - Class: 114
-      Script: {instanceID: 11164}
+      Script: {instanceID: 11058}
     - Class: 114
-      Script: {instanceID: 11420}
+      Script: {instanceID: 11220}
     - Class: 114
-      Script: {instanceID: 11544}
+      Script: {instanceID: 11252}
     - Class: 114
-      Script: {instanceID: 11546}
+      Script: {instanceID: 11508}
     - Class: 114
-      Script: {instanceID: 11816}
+      Script: {instanceID: 11632}
     - Class: 114
-      Script: {instanceID: 11842}
+      Script: {instanceID: 11634}
     - Class: 114
-      Script: {instanceID: 11848}
+      Script: {instanceID: 11904}
     - Class: 114
-      Script: {instanceID: 11862}
+      Script: {instanceID: 11930}
     - Class: 114
-      Script: {instanceID: 11888}
+      Script: {instanceID: 11936}
     - Class: 114
-      Script: {instanceID: 11898}
+      Script: {instanceID: 11950}
+    - Class: 114
+      Script: {instanceID: 11976}
+    - Class: 114
+      Script: {instanceID: 11986}
+    - Class: 114
+      Script: {instanceID: 21540}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1285,12 +1285,6 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ButtonsLocation
-  - hash:
-      serializedVersion: 2
       Hash: 35a9693c388776aaf487636491a20f11
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -1607,7 +1601,13 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ButtonsLocation
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/ereme/Downloads/Quiet-VR-develop/Samsung_School_Prototype/Build/build1.apk
+  playerPath: D:/Desktop/build.apk

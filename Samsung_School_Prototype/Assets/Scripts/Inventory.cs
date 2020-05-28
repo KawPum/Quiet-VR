@@ -157,6 +157,7 @@ public class Inventory : MonoBehaviour
             }
             player_object.items_mesh[0].transform.localScale = new Vector3(scale, scale, scale);
             player_object.items_mesh[0].GetComponent<ObjectRotate>().enabled = true;
+            scale = 0.5f;
             update_Text();
         }
     }

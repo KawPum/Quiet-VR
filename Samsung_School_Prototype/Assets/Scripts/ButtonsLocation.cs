@@ -47,6 +47,7 @@ public class ButtonsLocation : MonoBehaviour
         }
         transform.position = new Vector3(x, y, 0);
         transform.localScale = new Vector3(scale, scale, 0);
+        transform.GetComponent<ButtonsLocation>().enabled = false;
     }
 
     // Update is called once per frame
